@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/imama2/bootcamp-bri-mini-project/dto"
-	"github.com/imama2/bootcamp-bri-mini-project/modules/user"
 )
 
 func main() {
@@ -11,7 +10,7 @@ func main() {
 			"id": "1",
 		},
 		Method: "GET",
-		Path:   "/get-user",
+		Path:   "/get-customer",
 		Header: map[string]string{
 			"Authorization": "token",
 		},

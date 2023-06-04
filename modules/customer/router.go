@@ -1,4 +1,4 @@
-package user
+package customer
 
 import "github.com/imama2/bootcamp-bri-mini-project/dto"
 

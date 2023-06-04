@@ -1,4 +1,4 @@
-package user
+package customer
 
 import (
 	"github.com/imama2/bootcamp-bri-mini-project/entities"
@@ -16,7 +16,7 @@ type UsecaseInterface interface {
 func (uc Usecase) GetUserByID(payload Payload) []entities.User {
 	user := uc.userRepo.GetByID(payload.ID)
 
-	// if len user == 0 return no user
+	// if len customer == 0 return no customer
 	if len(user) == 0 {
 		return nil
 	}
