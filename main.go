@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/imama2/bootcamp-bri-mini-project/dto"
+	"github.com/imama2/bootcamp-bri-mini-project/modules/customer"
 )
 
 func main() {
@@ -15,8 +16,6 @@ func main() {
 			"Authorization": "token",
 		},
 	}
-
-	router := user.NewRouter()
+	router := customer.NewRouter()
 	router.Route(request)
-
 }

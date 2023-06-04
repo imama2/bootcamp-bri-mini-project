@@ -9,5 +9,5 @@ type Controller struct {
 }
 
 type ControllerInterface interface {
-	GetUserByID(payload Payload) dto.Response
+	GetCustomerByID(payload Payload) dto.Response
 }

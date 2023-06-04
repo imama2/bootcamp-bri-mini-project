@@ -10,11 +10,11 @@ type Usecase struct {
 }
 
 type UsecaseInterface interface {
-	GetUserByID(payload Payload) []entities.User
+	GetUserByID(payload Payload) []entities.Customer
 }
 
-func (uc Usecase) GetUserByID(payload Payload) []entities.User {
-	user := uc.userRepo.GetByID(payload.ID)
+func (uc Usecase) GetUserByID(payload Payload) []entities.Customer {
+	user := uc.userRepo.GetByID(payload.id)
 
 	// if len customer == 0 return no customer
 	if len(user) == 0 {
