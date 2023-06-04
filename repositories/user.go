@@ -5,15 +5,15 @@ import (
 	"gorm.io/gorm"
 )
 
-type UserRepository struct {
+type CustomerRepository struct {
 	db *gorm.DB
 }
 
-type UserRepositoryInterface interface {
-	GetByID(id int) []entities.User
+type CustomerRepositoryInterface interface {
+	GetByID(id int) []entities.Customer
 }
 
-func (repo UserRepository) GetByID(id int) []entities.User {
+func (repo CustomerRepository) GetByID(id int) []entities.Customer {
 	// implementasi query get customer by id
-	return []entities.User{}
+	return []entities.Customer{}
 }
