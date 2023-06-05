@@ -5,15 +5,29 @@ import (
 	"gorm.io/gorm"
 )
 
-type CustomerRepository struct {
+type Customer struct {
 	db *gorm.DB
 }
 
-type CustomerRepositoryInterface interface {
-	GetByID(id int) []entities.Customer
+func NewCustomer(dbCrud *gorm.DB) Customer {
+	return Customer{
+		db: dbCrud,
+	}
+
 }
 
-func (repo CustomerRepository) GetByID(id int) []entities.Customer {
-	// implementasi query get customer by id
-	return []entities.Customer{}
+type CustomerRepositoryInterface interface {
+	GetCustomerByID(id uint) (entities.Customer, error)
+	CreateCustomer(customer *entities.Customer) (*entities.Customer, error)
+}
+
+func (repo Customer) GetCustomerByID(id uint) (entities.Customer, error) {
+	var customer entities.Customer
+	repo.db.First(&customer, `id = ?`, id)
+	return customer, nil
+}
+
+func (repo Customer) CreateCustomer(customer *entities.Customer) (*entities.Customer, error) {
+	err := repo.db.Model(&entities.Customer{}).Create(customer).Error
+	return customer, err
 }

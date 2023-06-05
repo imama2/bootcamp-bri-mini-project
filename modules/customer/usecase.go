@@ -5,21 +5,34 @@ import (
 	"github.com/imama2/bootcamp-bri-mini-project/repositories"
 )
 
-type Usecase struct {
-	userRepo repositories.UserRepositoryInterface
+type UseCaseCustomer interface {
+	CreateCustomer(user CustomerParam) (entities.Customer, error)
+	GetCustomerByID(id uint) (entities.Customer, error)
 }
 
-type UsecaseInterface interface {
-	GetUserByID(payload Payload) []entities.Customer
+type useCaseCustomer struct {
+	customerRepo repositories.CustomerRepositoryInterface
 }
 
-func (uc Usecase) GetUserByID(payload Payload) []entities.Customer {
-	user := uc.userRepo.GetByID(payload.id)
+func (uc useCaseCustomer) CreateCustomer(customer CustomerParam) (entities.Customer, error) {
+	var newCustomer *entities.Customer
 
-	// if len customer == 0 return no customer
-	if len(user) == 0 {
-		return nil
+	newCustomer = &entities.Customer{
+		Firstname: customer.Firstname,
+		Lastname:  customer.Lastname,
+		Email:     customer.Email,
+		Avatar:    customer.Avatar,
 	}
 
-	return user
+	_, err := uc.customerRepo.CreateCustomer(newCustomer)
+	if err != nil {
+		return *newCustomer, err
+	}
+	return *newCustomer, nil
+}
+
+func (uc useCaseCustomer) GetCustomerByID(id uint) (entities.Customer, error) {
+	var cust entities.Customer
+	cust, err := uc.customerRepo.GetCustomerByID(id)
+	return cust, err
 }
