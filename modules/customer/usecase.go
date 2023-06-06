@@ -36,24 +36,3 @@ func (uc useCaseCustomer) GetCustomerByID(id uint) (entities.Customer, error) {
 	cust, err := uc.customerRepo.GetCustomerByID(id)
 	return cust, err
 }
-
-func (uc useCaseCustomer) UpdateCustomer(param CustomerParam, id uint) (any, error) {
-	var editCustomer *entities.Customer
-	editCustomer = &entities.Customer{
-		ID:        id,
-		Firstname: param.Firstname,
-		Lastname:  param.Lastname,
-		Email:     param.Email,
-		Avatar:    param.Avatar,
-	}
-	_, err := uc.customerRepo.UpdateCustomer(editCustomer)
-	if err != nil {
-		return *editCustomer, err
-	}
-	return *editCustomer, nil
-}
-
-func (uc useCaseCustomer) DeleteCustomer(email string) (any, error) {
-	_, err := uc.customerRepo.DeleteCustomer(email)
-	return nil, err
-}
