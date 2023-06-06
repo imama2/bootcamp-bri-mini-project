@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-// struktur data suatu table
 type Customer struct {
 	gorm.Model
 	ID        uint   `gorm:"primary_key"`

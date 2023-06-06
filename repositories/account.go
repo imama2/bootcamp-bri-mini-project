@@ -21,6 +21,7 @@ type AccountRepositoryInterface interface {
 	UpdateAccount(user *entities.Account) (any, error)
 	CreateAccount(account *entities.Account) (*entities.Account, error)
 	DeleteAccount(email string) (any, error)
+	GetAccountByUsernameAndPassword(username, password string) (entities.Account, error)
 }
 
 func (repo Account) GetAccountByID(id uint) (entities.Account, error) {
@@ -45,6 +46,13 @@ func (repo Account) DeleteAccount(email string) (any, error) {
 	err := repo.db.Model(&entities.Account{}).
 		Where("email = ?", email).
 		Delete(&entities.Account{}).
+		Error
+	return nil, err
+}
+
+func (repo Account) GetAccountByUsernameAndPassword(username, password string) (any, error) {
+	err := repo.db.Model(&entities.Account{}).
+		Where("username = ? and password = ?", username, password).
 		Error
 	return nil, err
 }

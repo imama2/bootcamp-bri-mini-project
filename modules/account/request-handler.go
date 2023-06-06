@@ -15,7 +15,7 @@ type RequestHandlerAccount struct {
 	ctr ControllerAccount
 }
 
-func NewCostumerRequestHandler(dbCrud *gorm.DB) RequestHandlerAccount {
+func NewAccountRequestHandler(dbCrud *gorm.DB) RequestHandlerAccount {
 	return RequestHandlerAccount{
 		ctr: controllerAccount{
 			accountUseCase: useCaseAccount{
@@ -57,4 +57,21 @@ func (h RequestHandlerAccount) CreateAccount(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, res)
+}
+
+func (h *RequestHandlerAccount) GetAccountByUsernameAndPassword(c *gin.Context) {
+	request := AccountParam{}
+	err := c.BindJSON(&request)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, dto.DefaultBadRequestResponse())
+		return
+	}
+
+	response, err := h.ctr.GetAccountByUsernameAndPassword(request.Username, request.Password)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, dto.DefaultErrorResponse())
+		return
+	}
+
+	c.JSON(http.StatusOK, response)
 }

@@ -5,18 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-//type Router struct {
-//	rq RequestHandlerInterface
-//}
-//
-//func NewRouter() Router {
-//	return Router{}
-//}
-//
-//func (r Router) Route(request dto.Request) {
-//
-//}
-
 type RouterAccount struct {
 	AccountRequestHandler RequestHandlerAccount
 }
@@ -24,7 +12,7 @@ type RouterAccount struct {
 func NewRouter(
 	dbCrud *gorm.DB,
 ) RouterAccount {
-	return RouterAccount{AccountRequestHandler: NewCostumerRequestHandler(
+	return RouterAccount{AccountRequestHandler: NewAccountRequestHandler(
 		dbCrud,
 	)}
 }
@@ -37,6 +25,6 @@ func (r RouterAccount) Handle(router *gin.Engine) {
 		r.AccountRequestHandler.CreateAccount,
 	)
 
-	user.GET("/register/:id",
-		r.AccountRequestHandler.GetAccountByID)
+	user.GET("/login",
+		r.AccountRequestHandler.GetAccountByUsernameAndPassword)
 }

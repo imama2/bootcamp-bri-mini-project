@@ -11,6 +11,7 @@ type controllerAccount struct {
 type ControllerAccount interface {
 	CreateAccount(req AccountParam) (any, error)
 	GetAccountByID(id uint) (FindAccount, error)
+	GetAccountByUsernameAndPassword(username, password string) (FindAccount, error)
 }
 
 func (uc controllerAccount) CreateAccount(req AccountParam) (any, error) {
@@ -51,4 +52,20 @@ func (uc controllerAccount) GetAccountByID(id uint) (FindAccount, error) {
 	}
 	return res, nil
 
+}
+
+func (uc controllerAccount) GetAccountByUsernameAndPassword(username, password string) (FindAccount, error) {
+	var res FindAccount
+	user, err := uc.accountUseCase.GetAccountByUsernameAndPassword(username, password)
+	if err != nil {
+		return FindAccount{}, err
+	}
+	res.Data = user
+	res.ResponseMeta = dto.ResponseMeta{
+		Success:      true,
+		MessageTitle: "Success Update user",
+		Message:      "Success Register",
+		ResponseTime: "",
+	}
+	return res, nil
 }

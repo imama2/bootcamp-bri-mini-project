@@ -22,3 +22,13 @@ type FindAccount struct {
 	dto.ResponseMeta
 	Data entities.Account `json:"data"`
 }
+
+//type LoginRequest struct {
+//	Username string `json:"username"`
+//	Password string `json:"password"`
+//}
+//
+//type LoginResponse struct {
+//	dto.ResponseMeta
+//	Data entities.Account `json:"data"`
+//}

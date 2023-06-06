@@ -8,6 +8,7 @@ import (
 type UseCaseAccount interface {
 	CreateAccount(user AccountParam) (entities.Account, error)
 	GetAccountByID(id uint) (entities.Account, error)
+	GetAccountByUsernameAndPassword(user AccountParam) (entities.Account, error)
 }
 
 type useCaseAccount struct {
@@ -35,5 +36,11 @@ func (uc useCaseAccount) CreateAccount(account AccountParam) (entities.Account, 
 func (uc useCaseAccount) GetAccountByID(id uint) (entities.Account, error) {
 	var cust entities.Account
 	cust, err := uc.accountRepo.GetAccountByID(id)
+	return cust, err
+}
+
+func (uc useCaseAccount) GetAccountByUsernameAndPassword(username, password string) (entities.Account, error) {
+	var cust entities.Account
+	cust, err := uc.accountRepo.GetAccountByUsernameAndPassword(username, password)
 	return cust, err
 }
