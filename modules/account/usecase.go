@@ -8,7 +8,7 @@ import (
 type UseCaseAccount interface {
 	CreateAccount(user AccountParam) (entities.Account, error)
 	GetAccountByID(id uint) (entities.Account, error)
-	GetAccountByUsernameAndPassword(user AccountParam) (entities.Account, error)
+	GetAccountByUsernameAndPassword(username, password string) (entities.Account, error)
 }
 
 type useCaseAccount struct {

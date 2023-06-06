@@ -17,18 +17,18 @@ func NewAccount(dbCrud *gorm.DB) Account {
 }
 
 type AccountRepositoryInterface interface {
-	GetAccountByID(id uint) (entities.Account, error)
+	//GetAccountByID(id uint) (entities.Account, error)
 	UpdateAccount(user *entities.Account) (any, error)
 	CreateAccount(account *entities.Account) (*entities.Account, error)
 	DeleteAccount(email string) (any, error)
-	GetAccountByUsernameAndPassword(username, password string) (entities.Account, error)
+	GetAccountByUsernameAndPassword(username, password string) (any, error)
 }
 
-func (repo Account) GetAccountByID(id uint) (entities.Account, error) {
-	var account entities.Account
-	repo.db.First(&account, `id = ?`, id)
-	return account, nil
-}
+//func (repo Account) GetAccountByID(id uint) (entities.Account, error) {
+//	var account entities.Account
+//	repo.db.First(&account, `id = ?`, id)
+//	return account, nil
+//}
 
 func (repo Account) CreateAccount(account *entities.Account) (*entities.Account, error) {
 	err := repo.db.Model(&entities.Account{}).Create(account).Error

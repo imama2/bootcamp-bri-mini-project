@@ -10,7 +10,7 @@ type controllerAccount struct {
 
 type ControllerAccount interface {
 	CreateAccount(req AccountParam) (any, error)
-	GetAccountByID(id uint) (FindAccount, error)
+	//GetAccountByID(id uint) (FindAccount, error)
 	GetAccountByUsernameAndPassword(username, password string) (FindAccount, error)
 }
 
@@ -22,7 +22,7 @@ func (uc controllerAccount) CreateAccount(req AccountParam) (any, error) {
 	res := SuccessCreate{
 		ResponseMeta: dto.ResponseMeta{
 			Success:      true,
-			MessageTitle: "Success create user",
+			MessageTitle: "Success create Account",
 			Message:      "Success Register",
 			ResponseTime: "",
 		},
@@ -37,22 +37,22 @@ func (uc controllerAccount) CreateAccount(req AccountParam) (any, error) {
 	return res, nil
 }
 
-func (uc controllerAccount) GetAccountByID(id uint) (FindAccount, error) {
-	var res FindAccount
-	user, err := uc.accountUseCase.GetAccountByID(id)
-	if err != nil {
-		return FindAccount{}, err
-	}
-	res.Data = user
-	res.ResponseMeta = dto.ResponseMeta{
-		Success:      true,
-		MessageTitle: "Success Update user",
-		Message:      "Success Register",
-		ResponseTime: "",
-	}
-	return res, nil
-
-}
+//func (uc controllerAccount) GetAccountByID(id uint) (FindAccount, error) {
+//	var res FindAccount
+//	user, err := uc.accountUseCase.GetAccountByID(id)
+//	if err != nil {
+//		return FindAccount{}, err
+//	}
+//	res.Data = user
+//	res.ResponseMeta = dto.ResponseMeta{
+//		Success:      true,
+//		MessageTitle: "Success Update user",
+//		Message:      "Success Register",
+//		ResponseTime: "",
+//	}
+//	return res, nil
+//
+//}
 
 func (uc controllerAccount) GetAccountByUsernameAndPassword(username, password string) (FindAccount, error) {
 	var res FindAccount
