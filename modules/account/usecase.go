@@ -5,10 +5,10 @@ import (
 	"errors"
 	entity "github.com/imama2/bootcamp-bri-mini-project/entities/account"
 	"github.com/imama2/bootcamp-bri-mini-project/modules/account/do"
-	"github.com/imama2/bootcamp-bri-mini-project/package/helper"
-	"github.com/imama2/bootcamp-bri-mini-project/package/security"
-	"github.com/imama2/bootcamp-bri-mini-project/package/token"
 	"github.com/imama2/bootcamp-bri-mini-project/repositories"
+	"github.com/imama2/bootcamp-bri-mini-project/utils/helper"
+	"github.com/imama2/bootcamp-bri-mini-project/utils/security"
+	"github.com/imama2/bootcamp-bri-mini-project/utils/token"
 	"sync"
 	"time"
 )
@@ -19,7 +19,7 @@ type UseCaseAccountInterface interface {
 	// Registrasi akun
 	AccountRegistration(req do.Account) (int64, error)
 	// Admin Fetch
-	GetAllAdmin(req do.Account, pagi do.Pagination) (do.ListActorWithPaging, error)
+	GetAllAdmin(req do.Account, pagi do.Pagination) (do.ListAccountWithPaging, error)
 
 	// Super admin
 	GetAllApprovalAdmin() ([]do.Approval, error)
@@ -39,7 +39,7 @@ type UseCaseAccount struct {
 	DB                *sql.DB
 }
 
-func (uc *UseCaseAccount) GetAllAdmin(req do.Account, pagi do.Pagination) (do.ListActorWithPaging, error) {
+func (uc *UseCaseAccount) GetAllAdmin(req do.Account, pagi do.Pagination) (do.ListAccountWithPaging, error) {
 	var (
 		err       error
 		wg        sync.WaitGroup
@@ -55,7 +55,7 @@ func (uc *UseCaseAccount) GetAllAdmin(req do.Account, pagi do.Pagination) (do.Li
 	// ?: Error tx with go routine, temporary solution using db queries, maybe tx MySQL doesn't support query select rows on goroutines
 	// tx, err := uc.DB.Begin()
 	// if err != nil {
-	// 	return do.ListActorWithPaging{}, err
+	// 	return do.ListAccountWithPaging{}, err
 	// }
 	// defer helper.CommitOrRollback(err, tx)
 
@@ -100,9 +100,9 @@ func (uc *UseCaseAccount) GetAllAdmin(req do.Account, pagi do.Pagination) (do.Li
 		case resPaging = <-chPaging:
 			continue
 		case err = <-errListAdmin:
-			return do.ListActorWithPaging{}, err
+			return do.ListAccountWithPaging{}, err
 		case err = <-errPagination:
-			return do.ListActorWithPaging{}, err
+			return do.ListAccountWithPaging{}, err
 		}
 	}
 
@@ -113,7 +113,7 @@ func (uc *UseCaseAccount) GetAllAdmin(req do.Account, pagi do.Pagination) (do.Li
 	etPaging.Total = resPaging.Total
 	etPaging.TotalPages = totalPages
 
-	combineRes := do.ListActorWithPaging{
+	combineRes := do.ListAccountWithPaging{
 		Pagination: do.Pagination(etPaging),
 		Admins:     DTOAccountList(result),
 	}

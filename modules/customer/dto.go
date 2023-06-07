@@ -1,23 +1,27 @@
 package customer
 
 import (
-	"github.com/imama2/bootcamp-bri-mini-project/dto"
-	"github.com/imama2/bootcamp-bri-mini-project/entities"
+	entity "github.com/imama2/bootcamp-bri-mini-project/entities/customer"
+	"github.com/imama2/bootcamp-bri-mini-project/modules/customer/do"
 )
 
-type CustomerParam struct {
-	Firstname string `json:"first_name"`
-	Lastname  string `json:"last_name"`
-	Email     string `json:"email"`
-	Avatar    string `json:"avatar"`
+func DTOCustomer(et entity.Customer) do.Customer {
+	return do.Customer{
+		ID:        et.ID,
+		FirstName: et.FirstName,
+		LastName:  et.LastName,
+		Email:     et.Email,
+		Avatar:    et.Avatar,
+		CreatedAt: et.CreatedAt,
+		UpdatedAt: et.UpdatedAt,
+	}
 }
 
-type SuccessCreate struct {
-	dto.ResponseMeta
-	Data CustomerParam `json:"data"`
-}
+func DTOListCustomer(et []entity.Customer) []do.Customer {
+	result := make([]do.Customer, 0)
+	for _, v := range et {
+		result = append(result, DTOCustomer(v))
+	}
 
-type FindCustomer struct {
-	dto.ResponseMeta
-	Data entities.Customer `json:"data"`
+	return result
 }

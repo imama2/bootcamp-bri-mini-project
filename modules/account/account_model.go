@@ -44,7 +44,7 @@ type ResGetAllAdminWithPaging struct {
 	Admins []ResponseActor `json:"admin"`
 }
 
-func ToResGetAllAdminWithPaging(dm domain.ListActorWithPaging) ResGetAllAdminWithPaging {
+func ToResGetAllAdminWithPaging(dm do.ListAccountWithPaging) ResGetAllAdminWithPaging {
 	return ResGetAllAdminWithPaging{
 		Pagination: Pagination{
 			Page:       dm.Page,
@@ -53,7 +53,7 @@ func ToResGetAllAdminWithPaging(dm domain.ListActorWithPaging) ResGetAllAdminWit
 			TotalPages: dm.TotalPages,
 			Offset:     dm.Offset,
 		},
-		Admins: ResponseListActor(dm.Admins),
+		Admins: ResponseListAccount(dm.Admins),
 	}
 }
 
@@ -74,7 +74,7 @@ type ResponseAdminReg struct {
 	Status       string `json:"status"`
 }
 
-func ToResponseActor(dt domain.Account) ResponseActor {
+func ToResponseActor(dt do.Account) ResponseActor {
 	return ResponseActor{
 		ID:         dt.ID,
 		Username:   dt.Username,
@@ -86,7 +86,7 @@ func ToResponseActor(dt domain.Account) ResponseActor {
 	}
 }
 
-func ToResponseAdminReg(dt domain.Approval) ResponseAdminReg {
+func ToResponseAdminReg(dt do.Approval) ResponseAdminReg {
 	return ResponseAdminReg{
 		ID:           dt.ID,
 		AdminId:      dt.AdminId,
@@ -95,7 +95,7 @@ func ToResponseAdminReg(dt domain.Approval) ResponseAdminReg {
 	}
 }
 
-func ResponseListActor(dt []domain.Account) []ResponseActor {
+func ResponseListAccount(dt []do.Account) []ResponseActor {
 	result := make([]ResponseActor, 0)
 	for _, v := range dt {
 		result = append(result, ToResponseActor(v))
@@ -104,7 +104,7 @@ func ResponseListActor(dt []domain.Account) []ResponseActor {
 	return result
 }
 
-func ResponseListAdminReg(dt []domain.Approval) []ResponseAdminReg {
+func ResponseListAdminReg(dt []do.Approval) []ResponseAdminReg {
 	result := make([]ResponseAdminReg, 0)
 	for _, v := range dt {
 		result = append(result, ToResponseAdminReg(v))

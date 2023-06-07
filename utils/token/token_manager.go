@@ -2,7 +2,7 @@ package token
 
 import (
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/imama2/bootcamp-bri-mini-project/package/config"
+	"github.com/imama2/bootcamp-bri-mini-project/utils/config"
 	"log"
 )
 

@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/imama2/bootcamp-bri-mini-project/package/token"
+	token2 "github.com/imama2/bootcamp-bri-mini-project/utils/token"
 	"log"
 )
 
@@ -15,15 +15,15 @@ func Auth() gin.HandlerFunc {
 			return
 		}
 
-		auth_token := token.SplitBearer(tokenString)
-		_, err := token.VerifyAccessToken(auth_token)
+		auth_token := token2.SplitBearer(tokenString)
+		_, err := token2.VerifyAccessToken(auth_token)
 		if err != nil {
 			c.JSON(401, gin.H{"error": err.Error()})
 			c.Abort()
 			return
 		}
 
-		accountData, err := token.GetDataUserFromToken(auth_token)
+		accountData, err := token2.GetDataUserFromToken(auth_token)
 		if err != nil {
 			log.Println(err)
 		}
@@ -45,15 +45,15 @@ func AuthSuperAdmin() gin.HandlerFunc {
 			return
 		}
 
-		auth_token := token.SplitBearer(tokenString)
-		_, err := token.VerifyAccessToken(auth_token)
+		auth_token := token2.SplitBearer(tokenString)
+		_, err := token2.VerifyAccessToken(auth_token)
 		if err != nil {
 			c.JSON(401, gin.H{"error": err.Error()})
 			c.Abort()
 			return
 		}
 
-		accountData, err := token.GetDataUserFromToken(auth_token)
+		accountData, err := token2.GetDataUserFromToken(auth_token)
 		if err != nil {
 			log.Println(err)
 		}

@@ -13,7 +13,7 @@ type Account struct {
 	UpdatedAt  time.Time
 }
 
-type ListActorWithPaging struct {
+type ListAccountWithPaging struct {
 	Pagination
 	Admins []Account
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/imama2/bootcamp-bri-mini-project/exception"
 	"github.com/imama2/bootcamp-bri-mini-project/modules/account/do"
-	"github.com/imama2/bootcamp-bri-mini-project/package/middleware"
+	"github.com/imama2/bootcamp-bri-mini-project/utils/middleware"
 	"net/http"
 	"strconv"
 )
