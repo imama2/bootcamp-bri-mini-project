@@ -19,7 +19,7 @@ func NewAccountRequestHandler(uc UseCaseAccountInterface) *RequestHandlerAccount
 		AccountUseCase: uc,
 	}
 }
-func (h *Handler) RouteHandler(app *gin.Engine) {
+func (h *RequestHandlerAccount) RouteAccount(app *gin.Engine) {
 	// account
 	a := NewAccountRequestHandler(h.AccountUseCase)
 	a.RouteHandler(app)
