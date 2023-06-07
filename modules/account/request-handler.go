@@ -35,9 +35,9 @@ func (h *RequestHandlerAccount) RouteHandler(app *gin.Engine) {
 	g.GET("", h.GetAllAdmin)
 
 	// only super_admin
-	g.GET("/admin-reg", middleware.AuthSuperAdmin(), h.GetAllAppovalAdmin)
-	g.PUT("/admin-reg", middleware.AuthSuperAdmin(), h.UpdateAdminStatus)
-	g.DELETE("/admin-reg", middleware.AuthSuperAdmin(), h.DeleteAdminByID)
+	g.GET("/admin-menu", middleware.AuthSuperAdmin(), h.GetAllAppovalAdmin)
+	g.PUT("/admin-menu", middleware.AuthSuperAdmin(), h.UpdateAdminStatus)
+	g.DELETE("/admin-menu", middleware.AuthSuperAdmin(), h.DeleteAdminByID)
 }
 
 func (h *RequestHandlerAccount) SignIn(c *gin.Context) {
@@ -49,12 +49,12 @@ func (h *RequestHandlerAccount) SignIn(c *gin.Context) {
 		return
 	}
 
-	domain := domain.Account{
+	do := do.Account{
 		Username: req.Username,
 		Password: req.Password,
 	}
 
-	result, err := h.AccountUseCase.AccountAuthentication(domain)
+	result, err := h.AccountUseCase.AccountAuthentication(do)
 	if err != nil {
 		exception.NewInternalError(http.StatusInternalServerError, err.Error(), c)
 		return
@@ -77,12 +77,12 @@ func (h *RequestHandlerAccount) RegisterAccount(c *gin.Context) {
 		return
 	}
 
-	domain := domain.Account{
+	do := do.Account{
 		Username: req.Username,
 		Password: req.Password,
 	}
 
-	result, err := h.AccountUseCase.AccountRegistration(domain)
+	result, err := h.AccountUseCase.AccountRegistration(do)
 	if err != nil {
 		exception.NewInternalError(http.StatusInternalServerError, err.Error(), c)
 		return
@@ -120,10 +120,10 @@ func (h *RequestHandlerAccount) GetAllAdmin(c *gin.Context) {
 	}
 	username := c.Query("username")
 
-	dm := domain.Account{
+	dm := do.Account{
 		Username: username,
 	}
-	dmPaging := domain.Pagination{
+	dmPaging := do.Pagination{
 		Page: pageInt,
 	}
 
@@ -152,7 +152,7 @@ func (h *RequestHandlerAccount) DeleteAdminByID(c *gin.Context) {
 		return
 	}
 
-	dm := domain.Account{
+	dm := do.Account{
 		ID: req.ID,
 	}
 
@@ -179,12 +179,12 @@ func (h *RequestHandlerAccount) UpdateAdminStatus(c *gin.Context) {
 		return
 	}
 
-	dmActor := domain.Account{
+	dmActor := do.Account{
 		ID:         req.AdminID,
 		IsVerified: req.IsVerified,
 		IsActive:   req.IsActive,
 	}
-	dmAdminReg := domain.Approval{
+	dmAdminReg := do.Approval{
 		AdminId: req.AdminID,
 		Status:  req.Status,
 	}

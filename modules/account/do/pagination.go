@@ -1,4 +1,4 @@
-package domain
+package do
 
 type Pagination struct {
 	Page       int

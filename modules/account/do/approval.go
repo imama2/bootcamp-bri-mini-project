@@ -1,4 +1,4 @@
-package domain
+package do
 
 type Approval struct {
 	ID           int64

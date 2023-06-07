@@ -1,4 +1,4 @@
-package domain
+package do
 
 type Token struct {
 	Token string

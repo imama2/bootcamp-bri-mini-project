@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 	entity "github.com/imama2/bootcamp-bri-mini-project/entities/account"
-	do "github.com/imama2/bootcamp-bri-mini-project/modules/account/do"
+	"github.com/imama2/bootcamp-bri-mini-project/modules/account/do"
 	"github.com/imama2/bootcamp-bri-mini-project/package/helper"
 	"github.com/imama2/bootcamp-bri-mini-project/package/security"
 	"github.com/imama2/bootcamp-bri-mini-project/package/token"
