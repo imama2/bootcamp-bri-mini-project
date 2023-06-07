@@ -1,6 +1,6 @@
 package domain
 
-type AdminReg struct {
+type Approval struct {
 	ID           int64
 	AdminId      int64
 	SuperAdminID int64
