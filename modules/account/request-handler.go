@@ -1,6 +1,5 @@
 package account
 
-import "C"
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/imama2/bootcamp-bri-mini-project/exception"

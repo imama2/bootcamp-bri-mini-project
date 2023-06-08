@@ -13,10 +13,10 @@ func RouterInitiate(app *gin.Engine, DB *sql.DB) {
 	accountRepo := repositories.NewAccountRepository()
 	accountUC := account.NewAccountUseCase(accountRepo, DB)
 	AccountHandler := account.NewAccountRequestHandler(accountUC)
-	AccountHandler.RouteAccount(app)
+	AccountHandler.RouteHandler(app)
 
 	customerRepo := repositories.NewCustomerRepository()
 	customerUC := customer.NewCustomerUseCase(customerRepo, DB)
 	CustomerHandler := customer.NewCostumerRequestHandler(customerUC)
-	CustomerHandler.RouteCustomer(app)
+	CustomerHandler.RouteHandler(app)
 }
