@@ -17,8 +17,8 @@ func NewHandler(userUC UseCaseAccountInterface) *Handler {
 func (h Handler) Route(app *gin.Engine) {
 	// account
 	//b := NewAccountRequestHandler()
-	_ = WebResponse{}
-	_ = RequestHandlerAccount{AccountUseCase: h.AccountUseCase}
+	//_ = WebResponse{}
+	//_ = RequestHandlerAccount{AccountUseCase: h.AccountUseCase}
 	a := NewAccountRequestHandler(h.AccountUseCase)
 	a.RouteHandler(app)
 }
