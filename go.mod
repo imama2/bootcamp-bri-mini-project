@@ -2,6 +2,7 @@ module bootcamp-bri-mini-project
 
 go 1.20
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 require (
 	github.com/gin-gonic/gin v1.9.1
@@ -44,5 +45,7 @@ require (
 	google.golang.org/protobuf v1.30.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+=======
+>>>>>>> parent of 1ca851a (build : initiatal commit)
 =======
 >>>>>>> parent of 1ca851a (build : initiatal commit)
